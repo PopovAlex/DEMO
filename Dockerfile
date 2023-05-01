@@ -5,3 +5,6 @@ RUN CGO_ENABLE=0 go build -o app
 
 FROM scratch 
 ADD ./html /html
+COPY --from=buider /src/app .
+ENTRYPOINT ["/app"]
+EXPOSE 8080
