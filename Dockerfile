@@ -1,10 +1,10 @@
-FROM golang as buider
+FROM golang as builder
 WORKDIR /src
 COPY src .
-RUN CGO_ENABLE=0 go build -o app
+RUN CGO_ENABLED=0 go build -o app
 
-FROM scratch 
+FROM scratch
 ADD ./html /html
-COPY --from=buider /src/app .
-ENTRYPOINT ["/app"]
+COPY --from=builder /src/app .
+ENTRYPOINT [ "/app" ]
 EXPOSE 8080
